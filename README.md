@@ -405,6 +405,20 @@ print(find_free_partner(boys, girls, sort_boy_to_girl, sort_girl_to_boy))
 > 1. https://zhuanlan.zhihu.com/p/358125611
 >    轻松掌握 MMDetection 中常用算法(四)：ATSS
 
+### 57. anchor分析可视化
+
+> 1. https://zhuanlan.zhihu.com/p/271963670
+>
+>    CVChain：一条用视觉竞赛和项目经验打磨出的计算机视觉完整工具链
+>
+> 2. https://github.com/Media-Smart/volkscv/tree/master/volkscv/analyzer/statistics
+>
+> 3. https://github.com/Media-Smart/volkscv/tree/master/volkscv/analyzer/visualization
+
+![image-20210920233515660](README.assets/image-20210920233515660.png)
+
+
+
 ## 机器学习等其他算法相关问题
 
 ### 1. k-means算法
@@ -956,6 +970,8 @@ for i,(features,target) in enumerate(train_loader):
 ### 42. Pytorch定义网络的方法
 > 1. https://zhuanlan.zhihu.com/p/80308275
 >    关于Pytorch几种定义网络的方法 
+
+
 
 ## python相关问题
 
