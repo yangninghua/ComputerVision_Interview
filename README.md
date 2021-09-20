@@ -53,6 +53,20 @@
     - [40. 如何尝试解决目标检测框重叠问题](#40-如何尝试解决目标检测框重叠问题)
     - [41. smooth-L1loss,为什么用这个回归bbox](#41-smooth-l1loss为什么用这个回归bbox)
     - [42. KL散度是什么意思](#42-kl散度是什么意思)
+    - [43. 梯度爆炸，梯度消失是为什么？如何判断梯度爆炸，梯度消失?](#43-梯度爆炸梯度消失是为什么如何判断梯度爆炸梯度消失)
+    - [44. softmax如何防止数值溢出](#44-softmax如何防止数值溢出)
+    - [45. numpy实现双线性插值](#45-numpy实现双线性插值)
+    - [46. numpy实现conv，尤其是im2col的使用](#46-numpy实现conv尤其是im2col的使用)
+    - [47. numpy实现deformable conv的实现](#47-numpy实现deformable-conv的实现)
+    - [48. relu的正向传播和反向传播pytorch实现(要注意什么吗？)numpy实现](#48-relu的正向传播和反向传播pytorch实现要注意什么吗numpy实现)
+    - [50. PR曲线如何画，F-score是什么，mAP怎么求？](#50-pr曲线如何画f-score是什么map怎么求)
+    - [51. ROC和AUC，ROC的横纵坐标是什么，如何绘制ROC，AUC的具体计算方法](#51-roc和aucroc的横纵坐标是什么如何绘制rocauc的具体计算方法)
+  - [机器学习等其他算法相关问题](#机器学习等其他算法相关问题)
+    - [1. k-means算法](#1-k-means算法)
+    - [2. k-means++算法](#2-k-means算法)
+    - [3. dbscan算法](#3-dbscan算法)
+    - [4. KNN算法](#4-knn算法)
+    - [5.](#5)
   - [pytorch相关问题](#pytorch相关问题)
     - [1. nn.module nn.Function的区别](#1-nnmodule-nnfunction的区别)
     - [2. ModuleList 和 Sequential的区别](#2-modulelist-和-sequential的区别)
@@ -62,31 +76,70 @@
     - [6. model.eval()  model.train()的作用](#6-modeleval--modeltrain的作用)
     - [7. pytorch的中断恢复，Adadm优化器会恢复什么东西](#7-pytorch的中断恢复adadm优化器会恢复什么东西)
     - [8. pytorch的Dataloader](#8-pytorch的dataloader)
+    - [9. pytorch中的LSTM参数有哪些](#9-pytorch中的lstm参数有哪些)
+    - [10. pytorch的单机多卡](#10-pytorch的单机多卡)
+    - [11. pytorch中 .cuda() 的作用，两个tensor，一个加了.cuda()，一个没加，相加后结果如何](#11-pytorch中-cuda-的作用两个tensor一个加了cuda一个没加相加后结果如何)
+    - [12. pytorch框架的框架结构，模型表述，执行机制，分布式训练介绍](#12-pytorch框架的框架结构模型表述执行机制分布式训练介绍)
+    - [13. pytorch怎么对model进行fine-tuning并将原有model的一些node从graph中剔除](#13-pytorch怎么对model进行fine-tuning并将原有model的一些node从graph中剔除)
+    - [14. pytorch进行fine-tuning怎么对某个tensor or 某些层进行冻结不训练](#14-pytorch进行fine-tuning怎么对某个tensor-or-某些层进行冻结不训练)
+    - [15. pytorch底层用什么语言写的](#15-pytorch底层用什么语言写的)
+    - [16. pytorch中reshape()、view()、permute()、transpose()](#16-pytorch中reshapeviewpermutetranspose)
+    - [17. pytorch训练和测试有什么不同](#17-pytorch训练和测试有什么不同)
+    - [18. pytorch实现线性拟合](#18-pytorch实现线性拟合)
+    - [19. pytorch中使用tensorboardX输出各层梯度分布](#19-pytorch中使用tensorboardx输出各层梯度分布)
+    - [20. pytorch中dataloader如何指定线程数目](#20-pytorch中dataloader如何指定线程数目)
+    - [21. pytorch广播机制](#21-pytorch广播机制)
+    - [22. pytorch实现LSTM(直接调用即可)](#22-pytorch实现lstm直接调用即可)
+    - [23. pytorch如何加入正则化处理](#23-pytorch如何加入正则化处理)
+    - [24. pytorch权重衰减](#24-pytorch权重衰减)
+    - [25. pytorch定义一个模块或者网络，需要用到init函数和forward函数](#25-pytorch定义一个模块或者网络需要用到init函数和forward函数)
+    - [26. forward函数本质是什么，继承自nn.Layer类的什么方法(内置call)](#26-forward函数本质是什么继承自nnlayer类的什么方法内置call)
+    - [27. pytorch中的autograd机制，怎么计算二阶导数](#27-pytorch中的autograd机制怎么计算二阶导数)
+    - [28. 给一个坐标集合xy，为n * 2的tensor，包含n个二维空间点坐标，用pytorch函数计算各个点两两之间的欧式距离，返回一个n * n的tensor](#28-给一个坐标集合xy为n--2的tensor包含n个二维空间点坐标用pytorch函数计算各个点两两之间的欧式距离返回一个n--n的tensor)
+    - [29. pytorch中的concat如何实现](#29-pytorch中的concat如何实现)
+    - [30. pytorch中BN层的底层实现细节](#30-pytorch中bn层的底层实现细节)
+    - [31. pytorch怎么把一个gpu上的tensor转移到cpu上面](#31-pytorch怎么把一个gpu上的tensor转移到cpu上面)
+    - [32. tensor转numpy， numoy转tensor](#32-tensor转numpy-numoy转tensor)
+    - [33. 如果正向传播时有个自定义不可导部件，问怎么用pytorch写自定义反向传播式子去近似那个部件的BP](#33-如果正向传播时有个自定义不可导部件问怎么用pytorch写自定义反向传播式子去近似那个部件的bp)
+    - [34. 跑网络的时候，GPU现存不够怎么办，如果就只能用该GPU](#34-跑网络的时候gpu现存不够怎么办如果就只能用该gpu)
+    - [35. pytorch模型并行，数据并行](#35-pytorch模型并行数据并行)
+    - [36. 削减batchsize会导致BN不稳定，为什么，如何修改](#36-削减batchsize会导致bn不稳定为什么如何修改)
   - [python相关问题](#python相关问题)
     - [1. python深拷贝, 浅拷贝](#1-python深拷贝-浅拷贝)
     - [2. python函数的引用传递，值传递区别](#2-python函数的引用传递值传递区别)
     - [3. 多进程，多线程相关问题](#3-多进程多线程相关问题)
     - [4. 元组touple和列表list的区别](#4-元组touple和列表list的区别)
     - [5. 列表可以当字典的的key吗](#5-列表可以当字典的的key吗)
+    - [6. c++和python如何相互调用](#6-c和python如何相互调用)
+    - [7. Pandas中——map、apply、applymap的区别](#7-pandas中mapapplyapplymap的区别)
+    - [8. python装饰器，有哪些装饰器](#8-python装饰器有哪些装饰器)
+    - [9. python生成器](#9-python生成器)
+    - [10. python如何自定义一个装饰器](#10-python如何自定义一个装饰器)
+    - [11. python super函数](#11-python-super函数)
+    - [12. lambda函数](#12-lambda函数)
   - [git相关问题](#git相关问题)
-    - [1. 待续](#1-待续)
-    - [2. 待续](#2-待续)
+    - [1. git合并分支操作](#1-git合并分支操作)
+    - [2. git中rebase的作用](#2-git中rebase的作用)
     - [3. 待续](#3-待续)
   - [docker相关问题](#docker相关问题)
-    - [1. 待续](#1-待续-1)
-    - [2. 待续](#2-待续-1)
+    - [1. docker磁盘映射的参数是什么](#1-docker磁盘映射的参数是什么)
+    - [2. 待续](#2-待续)
     - [3. 待续](#3-待续-1)
   - [shell相关问题](#shell相关问题)
-    - [1. 待续](#1-待续-2)
-    - [2. 待续](#2-待续-2)
+    - [1. 找出文件夹中指定后缀文件的命令](#1-找出文件夹中指定后缀文件的命令)
+    - [2. 待续](#2-待续-1)
     - [3. 待续](#3-待续-2)
   - [Anaconda相关问题](#anaconda相关问题)
-    - [1. 待续](#1-待续-3)
-    - [2. 待续](#2-待续-3)
+    - [1. 待续](#1-待续)
+    - [2. 待续](#2-待续-2)
     - [3. 待续](#3-待续-3)
   - [Leetcode相关问题](#leetcode相关问题)
     - [1. 岛屿问题---进阶版如果8个方向都可以呢(POJ-2386)](#1-岛屿问题---进阶版如果8个方向都可以呢poj-2386)
-    - [2. 待续](#2-待续-4)
+    - [2. 求开平方n，开三次根号n(如果想保留4位有效数字呢？)](#2-求开平方n开三次根号n如果想保留4位有效数字呢)
+    - [3. 给你一个由若干 0 和 1 组成的二维网格 grid，请你找出边界全部由 1 组成的最大 正方形 子网格，并返回该子网格中的元素数量。如果不存在，则返回 0](#3-给你一个由若干-0-和-1-组成的二维网格-grid请你找出边界全部由-1-组成的最大-正方形-子网格并返回该子网格中的元素数量如果不存在则返回-0)
+  - [概率论相关问题](#概率论相关问题)
+    - [1. 圆上任选三点组成三角形，这个三角形是锐角、钝角和直角三角形的概率分别是多少？](#1-圆上任选三点组成三角形这个三角形是锐角钝角和直角三角形的概率分别是多少)
+    - [2. 待续](#2-待续-3)
     - [3. 待续](#3-待续-4)
 
 ## 跟进前沿遇到的知识点
@@ -304,6 +357,34 @@ print(find_free_partner(boys, girls, sort_boy_to_girl, sort_girl_to_boy))
 ### 41. smooth-L1loss,为什么用这个回归bbox
 
 ### 42. KL散度是什么意思
+
+### 43. 梯度爆炸，梯度消失是为什么？如何判断梯度爆炸，梯度消失?
+
+### 44. softmax如何防止数值溢出
+
+### 45. numpy实现双线性插值
+
+### 46. numpy实现conv，尤其是im2col的使用
+
+### 47. numpy实现deformable conv的实现
+
+### 48. relu的正向传播和反向传播pytorch实现(要注意什么吗？)numpy实现
+
+### 50. PR曲线如何画，F-score是什么，mAP怎么求？
+
+### 51. ROC和AUC，ROC的横纵坐标是什么，如何绘制ROC，AUC的具体计算方法
+
+## 机器学习等其他算法相关问题
+
+### 1. k-means算法
+
+### 2. k-means++算法
+
+### 3. dbscan算法
+
+### 4. KNN算法
+
+### 5. 
 
 ## pytorch相关问题
 
@@ -714,6 +795,62 @@ for each in net.trace:
 
 ### 8. pytorch的Dataloader
 
+### 9. pytorch中的LSTM参数有哪些
+
+### 10. pytorch的单机多卡
+
+### 11. pytorch中 .cuda() 的作用，两个tensor，一个加了.cuda()，一个没加，相加后结果如何
+
+### 12. pytorch框架的框架结构，模型表述，执行机制，分布式训练介绍
+
+### 13. pytorch怎么对model进行fine-tuning并将原有model的一些node从graph中剔除
+
+### 14. pytorch进行fine-tuning怎么对某个tensor or 某些层进行冻结不训练
+
+### 15. pytorch底层用什么语言写的
+
+### 16. pytorch中reshape()、view()、permute()、transpose()
+
+### 17. pytorch训练和测试有什么不同
+
+### 18. pytorch实现线性拟合
+
+### 19. pytorch中使用tensorboardX输出各层梯度分布
+
+### 20. pytorch中dataloader如何指定线程数目
+
+### 21. pytorch广播机制
+
+### 22. pytorch实现LSTM(直接调用即可)
+
+### 23. pytorch如何加入正则化处理
+
+### 24. pytorch权重衰减
+
+### 25. pytorch定义一个模块或者网络，需要用到init函数和forward函数
+
+### 26. forward函数本质是什么，继承自nn.Layer类的什么方法(内置call)
+
+### 27. pytorch中的autograd机制，怎么计算二阶导数
+
+### 28. 给一个坐标集合xy，为n * 2的tensor，包含n个二维空间点坐标，用pytorch函数计算各个点两两之间的欧式距离，返回一个n * n的tensor
+
+### 29. pytorch中的concat如何实现
+
+### 30. pytorch中BN层的底层实现细节
+
+### 31. pytorch怎么把一个gpu上的tensor转移到cpu上面
+
+### 32. tensor转numpy， numoy转tensor
+
+### 33. 如果正向传播时有个自定义不可导部件，问怎么用pytorch写自定义反向传播式子去近似那个部件的BP
+
+### 34. 跑网络的时候，GPU现存不够怎么办，如果就只能用该GPU
+
+### 35. pytorch模型并行，数据并行
+
+### 36. 削减batchsize会导致BN不稳定，为什么，如何修改
+
 ## python相关问题
 
 ### 1. python深拷贝, 浅拷贝
@@ -722,20 +859,33 @@ for each in net.trace:
 
 ### 3. 多进程，多线程相关问题
 
-
 ### 4. 元组touple和列表list的区别
 
 ### 5. 列表可以当字典的的key吗
 
-## git相关问题
-### 1. 待续
+### 6. c++和python如何相互调用
 
-### 2. 待续
+### 7. Pandas中——map、apply、applymap的区别
+
+### 8. python装饰器，有哪些装饰器
+
+### 9. python生成器
+
+### 10. python如何自定义一个装饰器
+
+### 11. python super函数
+
+### 12. lambda函数
+
+## git相关问题
+### 1. git合并分支操作
+
+### 2. git中rebase的作用
 
 ### 3. 待续
 
 ## docker相关问题
-### 1. 待续
+### 1. docker磁盘映射的参数是什么
 
 ### 2. 待续
 
@@ -743,7 +893,7 @@ for each in net.trace:
 
 ## shell相关问题
 
-### 1. 待续
+### 1. 找出文件夹中指定后缀文件的命令
 
 ### 2. 待续
 
@@ -761,6 +911,23 @@ for each in net.trace:
 ## Leetcode相关问题
 
 ### 1. 岛屿问题---进阶版如果8个方向都可以呢(POJ-2386)
+
+### 2. 求开平方n，开三次根号n(如果想保留4位有效数字呢？)
+
+### 3. 给你一个由若干 0 和 1 组成的二维网格 grid，请你找出边界全部由 1 组成的最大 正方形 子网格，并返回该子网格中的元素数量。如果不存在，则返回 0
+> 1. https://leetcode.com/problems/largest-1-bordered-square/
+
+
+## 概率论相关问题
+
+### 1. 圆上任选三点组成三角形，这个三角形是锐角、钝角和直角三角形的概率分别是多少？
+> 1. 【官方双语】如何优雅地解答最难数学竞赛的压轴题？
+>
+>    https://www.bilibili.com/video/av17275211
+>
+> 2. https://blog.csdn.net/weixin_41245919/article/details/88913251
+>
+> 3. https://zhuanlan.zhihu.com/p/69530841
 
 ### 2. 待续
 
