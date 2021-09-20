@@ -61,6 +61,11 @@
     - [48. relu的正向传播和反向传播pytorch实现(要注意什么吗？)numpy实现](#48-relu的正向传播和反向传播pytorch实现要注意什么吗numpy实现)
     - [50. PR曲线如何画，F-score是什么，mAP怎么求？](#50-pr曲线如何画f-score是什么map怎么求)
     - [51. ROC和AUC，ROC的横纵坐标是什么，如何绘制ROC，AUC的具体计算方法](#51-roc和aucroc的横纵坐标是什么如何绘制rocauc的具体计算方法)
+    - [52. 削减batchsize会导致BN不稳定，为什么，如何修改](#52-削减batchsize会导致bn不稳定为什么如何修改)
+    - [53. YOLOX细节](#53-yolox细节)
+    - [54. CenterNet细节](#54-centernet细节)
+    - [55. FCOS细节](#55-fcos细节)
+    - [56. ATSS细节](#56-atss细节)
   - [机器学习等其他算法相关问题](#机器学习等其他算法相关问题)
     - [1. k-means算法](#1-k-means算法)
     - [2. k-means++算法](#2-k-means算法)
@@ -104,6 +109,12 @@
     - [34. 跑网络的时候，GPU现存不够怎么办，如果就只能用该GPU](#34-跑网络的时候gpu现存不够怎么办如果就只能用该gpu)
     - [35. pytorch模型并行，数据并行](#35-pytorch模型并行数据并行)
     - [36. 削减batchsize会导致BN不稳定，为什么，如何修改](#36-削减batchsize会导致bn不稳定为什么如何修改)
+    - [37. pytorch中的SyncBatchNorm和BatchNorm](#37-pytorch中的syncbatchnorm和batchnorm)
+    - [38. pytorch中的nn.Module](#38-pytorch中的nnmodule)
+    - [39. pytorch训练可视化](#39-pytorch训练可视化)
+    - [40. pytorch分布式](#40-pytorch分布式)
+    - [41. mmdetection的使用](#41-mmdetection的使用)
+    - [42. Pytorch定义网络的方法](#42-pytorch定义网络的方法)
   - [python相关问题](#python相关问题)
     - [1. python深拷贝, 浅拷贝](#1-python深拷贝-浅拷贝)
     - [2. python函数的引用传递，值传递区别](#2-python函数的引用传递值传递区别)
@@ -373,6 +384,26 @@ print(find_free_partner(boys, girls, sort_boy_to_girl, sort_girl_to_boy))
 ### 50. PR曲线如何画，F-score是什么，mAP怎么求？
 
 ### 51. ROC和AUC，ROC的横纵坐标是什么，如何绘制ROC，AUC的具体计算方法
+
+### 52. 削减batchsize会导致BN不稳定，为什么，如何修改
+
+### 53. YOLOX细节
+> 1. https://zhuanlan.zhihu.com/p/398545304
+>    YOLOX 在 MMDetection 中复现全流程解析
+> 2. https://zhuanlan.zhihu.com/p/405913343
+>    OpenMMLab 社区专访之 YOLOX 复现篇
+
+### 54. CenterNet细节
+> 1. https://zhuanlan.zhihu.com/p/374891478
+>    轻松掌握 MMDetection 中常用算法(七)：CenterNet
+
+### 55. FCOS细节
+> 1. https://zhuanlan.zhihu.com/p/358056615
+>    轻松掌握 MMDetection 中常用算法(三)：FCOS
+
+### 56. ATSS细节
+> 1. https://zhuanlan.zhihu.com/p/358125611
+>    轻松掌握 MMDetection 中常用算法(四)：ATSS
 
 ## 机器学习等其他算法相关问题
 
@@ -794,6 +825,12 @@ for each in net.trace:
 ### 7. pytorch的中断恢复，Adadm优化器会恢复什么东西
 
 ### 8. pytorch的Dataloader
+> 1. https://zhuanlan.zhihu.com/p/337850513
+>    PyTorch 源码解读之 torch.utils.data：解析数据处理全流程
+> 2. https://zhuanlan.zhihu.com/p/105507334
+>    两文读懂PyTorch中Dataset与DataLoader（一）打造自己的数据集
+> 3. https://zhuanlan.zhihu.com/p/105578087
+>    两文读懂PyTorch中Dataset与DataLoader（二）理解DataLoader源码
 
 ### 9. pytorch中的LSTM参数有哪些
 
@@ -826,12 +863,16 @@ for each in net.trace:
 ### 23. pytorch如何加入正则化处理
 
 ### 24. pytorch权重衰减
+> 1. https://zhuanlan.zhihu.com/p/346205754
+>    PyTorch 源码解读之 torch.optim：优化算法接口详解
 
 ### 25. pytorch定义一个模块或者网络，需要用到init函数和forward函数
 
 ### 26. forward函数本质是什么，继承自nn.Layer类的什么方法(内置call)
 
 ### 27. pytorch中的autograd机制，怎么计算二阶导数
+> 1. https://zhuanlan.zhihu.com/p/321449610
+>    PyTorch 源码解读之 torch.autograd：梯度计算详解
 
 ### 28. 给一个坐标集合xy，为n * 2的tensor，包含n个二维空间点坐标，用pytorch函数计算各个点两两之间的欧式距离，返回一个n * n的tensor
 
@@ -848,8 +889,39 @@ for each in net.trace:
 ### 34. 跑网络的时候，GPU现存不够怎么办，如果就只能用该GPU
 
 ### 35. pytorch模型并行，数据并行
+> 1. https://zhuanlan.zhihu.com/p/343951042
+>    PyTorch 源码解读之 DP & DDP：模型并行和分布式训练解析
 
 ### 36. 削减batchsize会导致BN不稳定，为什么，如何修改
+
+### 37. pytorch中的SyncBatchNorm和BatchNorm
+> 1. https://zhuanlan.zhihu.com/p/337732517
+>    PyTorch 源码解读之 BN & SyncBN：BN 与 多卡同步 BN 详解
+
+### 38. pytorch中的nn.Module
+> 1. https://zhuanlan.zhihu.com/p/340453841
+>    PyTorch 源码解读之 nn.Module：核心网络模块接口详解
+
+### 39. pytorch训练可视化
+> 1. https://zhuanlan.zhihu.com/p/387078211
+>    训练可视化工具哪款是你的菜？MMCV一行代码随你挑
+
+- TensorBoard
+- Neptune
+- WandB
+- MLflow
+- Dvclive
+
+### 40. pytorch分布式
+> 1. https://zhuanlan.zhihu.com/p/361314953
+>    PyTorch 源码解读之分布式训练了解一下？
+
+### 41. mmdetection的使用
+> 1. https://zhuanlan.zhihu.com/p/369826931关于Pytorch几种定义网络的方法
+
+### 42. Pytorch定义网络的方法
+> 1. https://zhuanlan.zhihu.com/p/80308275
+>    关于Pytorch几种定义网络的方法 
 
 ## python相关问题
 
