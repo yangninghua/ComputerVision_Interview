@@ -887,8 +887,42 @@ for each in net.trace:
 ### 33. 如果正向传播时有个自定义不可导部件，问怎么用pytorch写自定义反向传播式子去近似那个部件的BP
 
 ### 34. 跑网络的时候，GPU现存不够怎么办，如果就只能用该GPU
+> 1. https://zhuanlan.zhihu.com/p/65002487
+>    GPU 显存不足怎么办？
+
+**梯度累积**
+传统训练：
+
+```python
+for i,(feature,target) in enumerate(train_loader):
+    outputs = model(feature)  # 前向传播
+    loss = criterion(outputs,target)  # 计算损失
+
+    optimizer.zero_grad()   # 清空梯度
+    loss.backward()  # 计算梯度
+    optimizer.step()  # 反向传播， 更新网络参数
+```
+
+加入梯度累加之后:
+
+```python
+for i,(features,target) in enumerate(train_loader):
+    outputs = model(images)  # 前向传播
+    loss = criterion(outputs,target)  # 计算损失
+    loss = loss/accumulation_steps   # 可选，如果损失要在训练样本上取平均
+
+    loss.backward()  # 计算梯度
+    if((i+1)%accumulation_steps)==0:
+        optimizer.step()        # 反向传播，更新网络参数
+        optimizer.zero_grad()   # 清空梯度
+```
+
+更详细来说， 我们假设 `batch size = 4 `， `accumulation steps = 8` ， 梯度积累首先在前向传播的时候以 `batch_size=4` 来计算梯度，但是不更新参数，将梯度积累下来，直到我们计算了 `accumulation steps` 个 batch， 我们再更新参数。其实本质上就等价于：
+
+`真正的 batch_size = batch_size * accumulation_steps`
 
 ### 35. pytorch模型并行，数据并行
+
 > 1. https://zhuanlan.zhihu.com/p/343951042
 >    PyTorch 源码解读之 DP & DDP：模型并行和分布式训练解析
 
