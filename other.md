@@ -10,7 +10,7 @@
 
 旋转矩阵M为：
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/000.webp)
+![img](other.assets/000.webp)
 
 注意：
 
@@ -20,35 +20,35 @@
 
 为什么旋转矩阵M要这样写，我们详细推导一下：
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/001.webp)
+![img](other.assets/001.webp)
 
 这里需要先了解仿射变换的基本操作方式，
 
 回顾一下平移变换如下：
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/003.webp)
+![img](other.assets/003.webp)
 
 围绕原点θ的旋转变换如下：
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/004.webp)
+![img](other.assets/004.webp)
 
 这里我们将围绕原点旋转为基本旋转变换。
 
 其实我们可以利用平移变换和围绕原点(0,0)的旋转变换，来完成围绕任意点(rx,ry)的旋转变换，方法如下：
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/005.webp)
+![img](other.assets/005.webp)
 
 这三步的详细执行过程如下：
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/006.webp)
+![img](other.assets/006.webp)
 
 我们看到，每一步其实都是一个矩阵左乘的操作，所以我们可以把这三步的矩阵左乘合起来：
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/007.webp)
+![img](other.assets/007.webp)
 
 所以，对图片img0绕任意点(rx,ry)旋转的变换矩阵M可以总结为：
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/008.webp)
+![img](other.assets/008.webp)
 
 注意：我们图1中写的是逆时针旋转-theta，为了表述方便，我们令alpha = - theta,将负号去除。这样我们就总结出了绕任意点(rx,ry)顺时针旋转alpha的旋转矩阵M的公式
 
@@ -81,7 +81,7 @@ https://blog.csdn.net/ningxuanyu5854/article/details/101905295
 
 图示如下: 逆时针源自极坐标系的推导
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/20191002105000850.png)
+![img](other.assets/20191002105000850.png)
 
 
 
@@ -99,9 +99,9 @@ https://zhuanlan.zhihu.com/p/39717302 R-RPN文本检测
 
 由于本文使用的是倾斜的候选框，所以基于水平候选框的IOU计算方法不再适应，因此本提出了倾斜IOU的计算方法，其主要思路就是将两个矩形框相交的点和矩形框内的点，然后将这些点集进行顺时针排序，使用三角形剖分法计算IOU．具体的算法步骤如下：
 
-![image-20211011211554953](/home/ninghua/code/ComputerVision_Interview/other.assets/image-20211011211554953.png)
+![image-20211011211554953](other.assets/image-20211011211554953.png)
 
-![img](/home/ninghua/code/ComputerVision_Interview/other.assets/v2-4b73f1c6e5daade55911218b627f11e9_720w.jpg)
+![img](other.assets/v2-4b73f1c6e5daade55911218b627f11e9_720w.jpg)
 
 ```python
 from shapely.geometry import Polygon
@@ -133,7 +133,7 @@ https://blog.csdn.net/hajungong007/article/details/96891987 任意两个旋转�
 
 旋转bbox-iou 或多边形-iou
 
-![image-20211011204354440](/home/ninghua/code/ComputerVision_Interview/other.assets/image-20211011204354440.png)
+![image-20211011204354440](other.assets/image-20211011204354440.png)
 
 
 
@@ -178,7 +178,7 @@ ax.add_patch(PolygonPatch(r1.intersection(r2), fc='#009900', alpha=1))
 pyplot.show()
 ```
 
-![enter image description here](/home/ninghua/code/ComputerVision_Interview/other.assets/jHY7y.png)
+![enter image description here](other.assets/jHY7y.png)
 
 ```python
 from math import pi, cos, sin
