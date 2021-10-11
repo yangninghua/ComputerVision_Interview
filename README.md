@@ -153,6 +153,8 @@
     - [2. 待续](#2-待续-3)
     - [3. 待续](#3-待续-4)
 
+
+
 ## 跟进前沿遇到的知识点
 
 ### 1. 匈牙利算法(Hungarian algorithm) or KM(Kuhn-Munkres) 算法的流程
@@ -274,6 +276,140 @@ print(find_free_partner(boys, girls, sort_boy_to_girl, sort_girl_to_boy))
 >    Sinkhorn-Knopp  替换为  **SimOTA**
 >
 > 9. https://baijiahao.baidu.com/s?id=1697633320792229739&wfr=spider&for=pc 机器之心 Sinkhorn distance
+
+
+
+参考:
+
+最大熵
+
+https://blog.csdn.net/piglite/article/details/120000482
+
+运筹千里纵横论坛｜王祥丰：计算最优传输及其应用浅谈
+
+https://www.bilibili.com/video/BV1Gf4y1q74x
+
+Computational Optimal Transport
+
+https://arxiv.org/abs/1803.00567
+
+最优运输（Optimal Transfort）：从理论到填补的应用
+
+https://www.cnblogs.com/liuzhen1995/p/14524932.html
+
+最优传输系列-前言(Computational Optimal Transport)
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/88387077
+
+最优传输系列-第一篇
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/88387081
+
+最优传输系列-第二篇
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/88613536
+
+最优传输系列-第三篇（2.5）
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/88713539
+
+最优传输系列-第四篇（3.1-3.2）
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/88758099
+
+最优传输-ML实战
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/88860704
+
+最优传输系列-第五篇（3.3-3.4.1）
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/88889712
+
+最优传输系列-第六篇（3.4.2）
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/89009325
+
+最优传输系列-第七篇（3.5-3.5.2）
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/89325557
+
+最优传输-熵正则化（第八篇）
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/89546491
+
+最优传输-Sinkhorn算法（第九篇）
+
+https://blog.csdn.net/Utterly_Bonkers/article/details/90746259
+
+大数据分析中的算法
+
+https://www.bilibili.com/video/BV1m54y1B7Mq?p=31
+
+*Computational Optimal Transport* 文中提到的公式和我们上面介绍的信息熵公式稍有不同,具体原因google参考
+
+https://math.stackexchange.com/questions/3661938/alternate-definition-of-entropy
+$$
+\mathrm{H}(\mathrm{P})=-\sum_{i, j} \mathrm{P}_{i, j}\left(\log \left(\mathrm{P}_{i, j}\right)-1\right)
+$$
+主要是因为希望引入常数C
+$$
+\mathrm{H}(\mathrm{P})=C-\sum_{i, j} \mathrm{P}_{i, j}\left(\log \mathrm{P}_{i, j}\right)
+$$
+当C=1时
+$$
+\mathrm{H}(\mathrm{P})=1-\sum_{i, j} \mathrm{P}_{i, j}\left(\log \mathrm{P}_{i, j}\right)=-\sum_{i, j} \mathrm{P}_{i, j}\left(\log \left(\mathrm{P}_{i, j}\right)-1\right)
+$$
+因为
+$$
+\sum_{i,j} P_{i,j}=1
+$$
+其它相关
+
+https://github.com/PythonOT/POT
+
+[POT: Python Optimal Transport — POT Python Optimal Transport 0.7.0 documentation](https://pythonot.github.io/)
+
+[superGlue学习_u010949023的博客-CSDN博客](https://blog.csdn.net/u010949023/article/details/112846084)
+
+[superPoint学习_u010949023的博客-CSDN博客_superpoint](https://blog.csdn.net/u010949023/article/details/112827917)
+
+[一种基于注意力机制特征匹配网络SuperGlue：端到端深度学习SLAM的重要里程碑_3D视觉工坊-CSDN博客](https://blog.csdn.net/Yong_Qi2015/article/details/108878294)
+
+[CVPR论文笔记｜ SuperGlue - 知乎](https://zhuanlan.zhihu.com/p/342105673)
+
+[『论文笔记』SuperGlue - 叠加态的猫 - 博客园](https://www.cnblogs.com/hellcat/p/15260145.html)
+
+[Notes on Optimal Transport](https://michielstock.github.io/posts/2017/2017-11-5-OptimalTransport/)
+
+[Sinkhorn算法_zsfcg的专栏-CSDN博客_sinkhorn](https://blog.csdn.net/zsfcg/article/details/112510577)
+
+[wasserstein 距离（原理+Pytorch 代码实现）_好人就是拉风的博客-CSDN博客](https://blog.csdn.net/qq_41645987/article/details/119545612)
+
+[令人拍案叫绝的Wasserstein GAN - 知乎](https://zhuanlan.zhihu.com/p/25071913)
+
+[想要算一算Wasserstein距离？这里有一份PyTorch实战](https://baijiahao.baidu.com/s?id=1627683785269572414&wfr=spider&for=pc)
+
+[想要算一算Wasserstein距离？这里有一份PyTorch实战 | 机器之心](https://www.jiqizhixin.com/articles/19031102)
+
+[深度 ｜ 传说中的推土机距离基础，最优传输理论了解一下](https://baijiahao.baidu.com/s?id=1613371690275994826&wfr=spider&for=pc)
+
+[【免费】台湾大学李宏毅机器学习课程-6-GAN Lecture 6 (2018) WGAN, EBGAN-CSDN讲师的在线视频教程-CSDN程序员研修院](https://edu.csdn.net/course/play/29399/417039)
+
+[GitHub - gpeyre/SinkhornAutoDiff: Toolbox to integrate optimal transport loss functions using automatic differentiation and Sinkhorn's algorithm](https://github.com/gpeyre/SinkhornAutoDiff)
+
+[SinkhornAutoDiff/sinkhorn_pointcloud.py at master · gpeyre/SinkhornAutoDiff · GitHub](https://github.com/gpeyre/SinkhornAutoDiff/blob/master/sinkhorn_pointcloud.py)
+
+[wassdistance/layers.py at master · dfdazac/wassdistance · GitHub](https://github.com/dfdazac/wassdistance/blob/master/layers.py)
+
+[Approximating Wasserstein distances with PyTorch - Daniel Daza](https://dfdazac.github.io/sinkhorn.html)
+
+[Convolution/Graph Convolution.py at main · CVHuber/Convolution · GitHub](https://github.com/CVHuber/Convolution/blob/main/Graph Convolution.py)
+
+https://github.com/tkipf/pygcn/blob/master/pygcn/layers.py
+
+https://github.com/tkipf/pygcn
+
+
 
 ### 4. Physarum Dynamics算法(AAAI 2021)
 
@@ -1040,6 +1176,8 @@ for i,(features,target) in enumerate(train_loader):
 > 1. https://leetcode.com/problems/largest-1-bordered-square/
 
 
+
+
 ## 概率论相关问题
 
 ### 1. 圆上任选三点组成三角形，这个三角形是锐角、钝角和直角三角形的概率分别是多少？
@@ -1054,3 +1192,56 @@ for i,(features,target) in enumerate(train_loader):
 ### 2. 待续
 
 ### 3. 待续
+
+
+
+## numpy相关问题
+
+### 1. numpy.isin
+
+判断数组元素在另一数组中是否存在
+
+```python
+>>> element = 2*np.arange(4).reshape((2, 2))
+>>> element
+array([[0, 2],
+       [4, 6]])
+>>> test_elements = [1, 2, 4, 8]
+>>> mask = np.isin(element, test_elements)
+>>> mask
+array([[ False,  True],
+       [ True,  False]])
+>>> element[mask]
+array([2, 4])
+>>> mask = np.isin(element, test_elements, invert=True)
+>>> mask
+array([[ True, False],
+       [ False, True]])
+>>> element[mask]
+array([0, 6])
+```
+
+
+
+### 2. numpy.concatenate
+
+数组拼接
+
+```python
+>>> a = np.array([[1, 2], [3, 4]])
+>>> b = np.array([[5, 6]])
+>>> np.concatenate((a, b), axis=0)
+array([[1, 2],
+       [3, 4],
+       [5, 6]])
+>>> np.concatenate((a, b.T), axis=1)
+array([[1, 2, 5],
+       [3, 4, 6]])
+>>> np.concatenate((a, b), axis=None)
+array([1, 2, 3, 4, 5, 6])
+```
+
+
+
+
+
